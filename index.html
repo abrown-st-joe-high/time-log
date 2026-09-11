@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Log</title>
+<style>
+  :root{
+    --ink:#1c1f1a;
+    --paper:#fbfaf6;
+    --line:#d8d4c8;
+    --line-soft:#e9e6dc;
+    --moss:#4b5a3a;
+    --moss-dark:#38452a;
+    --rust:#a4522a;
+    --amber:#c98a2b;
+    --row-alt:#f3f1e8;
+    font-size:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Iowan Old Style","Georgia","Times New Roman",serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:2.5rem 1rem 4rem;
+  }
+  .wrap{
+    width:100%;
+    max-width:1080px;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:0.9rem;
+    margin-bottom:1.4rem;
+    gap:1rem;
+    flex-wrap:wrap;
+  }
+  h1{
+    font-size:1.9rem;
+    font-weight:600;
+    letter-spacing:0.01em;
+    margin:0;
+  }
+  .subtitle{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.82rem;
+    color:#6b6a5f;
+    margin-top:0.3rem;
+  }
+  .status{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.78rem;
+    color:#6b6a5f;
+    text-align:right;
+    min-width:150px;
+  }
+  .status .dot{
+    display:inline-block;
+    width:7px;height:7px;
+    border-radius:50%;
+    background:var(--moss);
+    margin-right:0.4em;
+  }
+
+  .toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:0.6rem;
+    margin-bottom:1rem;
+  }
+  button{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.85rem;
+    border:1px solid var(--ink);
+    background:var(--paper);
+    color:var(--ink);
+    padding:0.55rem 1rem;
+    cursor:pointer;
+    border-radius:2px;
+    transition:background 0.12s ease, color 0.12s ease, transform 0.05s ease;
+  }
+  button:hover{ background:var(--ink); color:var(--paper); }
+  button:active{ transform:translateY(1px); }
+  button.primary{ background:var(--moss); border-color:var(--moss); color:#fff; }
+  button.primary:hover{ background:var(--moss-dark); border-color:var(--moss-dark); }
+  button.ghost{ border-color:var(--line); color:#57564c; }
+  button.ghost:hover{ background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  button.danger-text{
+    border:none;background:none;color:#a4522a;padding:0.2rem 0.4rem;font-size:0.95rem;
+  }
+  button.danger-text:hover{ background:#f1e2da; color:#a4522a; }
+
+  .table-shell{
+    border:1px solid var(--ink);
+  }
+  .table-scroll{
+    max-height:60vh;
+    overflow-y:auto;
+    overflow-x:auto;
+  }
+  table{
+    border-collapse:collapse;
+    width:100%;
+    min-width:800px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.88rem;
+  }
+  thead th{
+    position:sticky;
+    top:0;
+    background:var(--ink);
+    color:var(--paper);
+    text-align:left;
+    font-weight:500;
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    padding:0.65rem 0.7rem;
+    z-index:2;
+    white-space:nowrap;
+  }
+  thead th.col-del{ width:2.2rem; }
+  tbody tr{ border-bottom:1px solid var(--line-soft); }
+  tbody tr:nth-child(even){ background:var(--row-alt); }
+  tbody tr:hover{ background:#eef1e6; }
+  td{
+    padding:0;
+    border-right:1px solid var(--line-soft);
+    vertical-align:top;
+  }
+  td:last-of-type{ border-right:none; }
+  .cell{
+    display:block;
+    width:100%;
+    min-width:100px;
+    padding:0.55rem 0.7rem;
+    outline:none;
+    white-space:pre-wrap;
+    word-break:break-word;
+    min-height:1.6em;
+    cursor:text;
+  }
+  .cell:focus{
+    background:#fff8e6;
+    box-shadow:inset 0 0 0 1.5px var(--amber);
+  }
+  .cell.empty::before{
+    content:attr(data-placeholder);
+    color:#a6a495;
+  }
+  td.time-col .cell{ font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .class-input{
+    width:100%;
+    min-width:110px;
+    border:none;
+    background:transparent;
+    font:inherit;
+    padding:0.55rem 0.7rem;
+    outline:none;
+  }
+  .class-input:focus{
+    background:#fff8e6;
+    box-shadow:inset 0 0 0 1.5px var(--amber);
+  }
+  td.col-del{ text-align:center; }
+
+  .empty-state{
+    padding:2.2rem 1rem;
+    text-align:center;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    color:#8a8878;
+    font-size:0.88rem;
+  }
+
+  footer{
+    margin-top:1.1rem;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.76rem;
+    color:#8a8878;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:0.5rem;
+  }
+  #file-input{ display:none; }
+
+  @media (max-width:600px){
+    h1{ font-size:1.5rem; }
+    .toolbar button{ flex:1 1 auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Time Log</h1>
+      <div class="subtitle">Project hours, kept locally in this browser.</div>
+    </div>
+    <div class="status" id="status">
+      <span class="dot"></span><span id="statusText">Loaded from this browser</span>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <button class="primary" id="btnAddRow">+ Add work event</button>
+    <button class="ghost" id="btnInsertNow">Insert current date &amp; time</button>
+    <button id="btnBackup">Backup to CSV</button>
+    <button id="btnLoadCsv">Load from CSV</button>
+    <input type="file" id="file-input" accept=".csv,text/csv">
+  </div>
+
+  <div class="table-shell">
+    <div class="table-scroll" id="tableScroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-del"></th>
+            <th>Start time</th>
+            <th>End time</th>
+            <th>Class</th>
+            <th>Assignment</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div class="empty-state" id="emptyState" style="display:none;">
+        No entries yet. Click "Add work event" to start logging.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Click any cell to edit it directly.</span>
+    <span id="rowCount">0 rows</span>
+  </footer>
+</div>
+
+<datalist id="classesList"></datalist>
+
+<script>
+(function(){
+  "use strict";
+
+  var STORAGE_KEY = "worklog_data_v1";
+  var COLUMNS = ["start","end","cls","assignment","notes"];
+
+  var tbody = document.getElementById("tbody");
+  var tableScroll = document.getElementById("tableScroll");
+  var emptyState = document.getElementById("emptyState");
+  var classesList = document.getElementById("classesList");
+  var rowCountEl = document.getElementById("rowCount");
+  var statusText = document.getElementById("statusText");
+  var fileInput = document.getElementById("file-input");
+
+  var data = [];          // array of {start,end,cls,assignment,notes}
+  var lastFocused = null; // {rowIndex, col} of the last focused editable field
+
+  // ---------- persistence ----------
+
+  function loadFromStorage(){
+    try{
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        if(Array.isArray(parsed)) return parsed;
+      }
+    }catch(e){ /* ignore corrupt storage */ }
+    return [];
+  }
+
+  function saveToStorage(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      statusText.textContent = "Saved in this browser";
+    }catch(e){
+      statusText.textContent = "Could not save (storage full or blocked)";
+    }
+  }
+
+  // ---------- rendering ----------
+
+  function pad(n){ return n < 10 ? "0"+n : ""+n; }
+
+  function formatNow(){
+    var d = new Date();
+    return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())+" "+
+           pad(d.getHours())+":"+pad(d.getMinutes());
+  }
+
+  function uniqueClasses(){
+    var seen = {};
+    var out = [];
+    data.forEach(function(r){
+      var c = (r.cls||"").trim();
+      if(c && !seen[c]){ seen[c] = true; out.push(c); }
+    });
+    return out;
+  }
+
+  function refreshClassList(){
+    classesList.innerHTML = "";
+    uniqueClasses().forEach(function(c){
+      var opt = document.createElement("option");
+      opt.value = c;
+      classesList.appendChild(opt);
+    });
+  }
+
+  function placeholderFor(col){
+    if(col === "start" || col === "end") return "click to set";
+    if(col === "cls") return "class";
+    if(col === "assignment") return "assignment";
+    return "notes";
+  }
+
+  function render(preserveScroll){
+    var scrollPos = preserveScroll ? tableScroll.scrollTop : 0;
+    tbody.innerHTML = "";
+    emptyState.style.display = data.length ? "none" : "block";
+
+    data.forEach(function(row, i){
+      var tr = document.createElement("tr");
+
+      // delete button
+      var tdDel = document.createElement("td");
+      tdDel.className = "col-del";
+      var delBtn = document.createElement("button");
+      delBtn.className = "danger-text";
+      delBtn.title = "Delete row";
+      delBtn.textContent = "\u00D7";
+      delBtn.addEventListener("click", function(){
+        data.splice(i, 1);
+        saveToStorage();
+        render(true);
+      });
+      tdDel.appendChild(delBtn);
+      tr.appendChild(tdDel);
+
+      // start / end (contenteditable, time-styled)
+      ["start","end"].forEach(function(col){
+        var td = document.createElement("td");
+        td.className = "time-col";
+        td.appendChild(makeEditableCell(row, i, col));
+        tr.appendChild(td);
+      });
+
+      // class (input + datalist)
+      var tdCls = document.createElement("td");
+      var clsInput = document.createElement("input");
+      clsInput.className = "class-input";
+      clsInput.setAttribute("list", "classesList");
+      clsInput.setAttribute("placeholder", "class");
+      clsInput.value = row.cls || "";
+      clsInput.addEventListener("focus", function(){ lastFocused = {rowIndex:i, col:"cls"}; });
+      clsInput.addEventListener("change", function(){
+        row.cls = clsInput.value;
+        saveToStorage();
+        refreshClassList();
+      });
+      clsInput.addEventListener("blur", function(){
+        row.cls = clsInput.value;
+        saveToStorage();
+        refreshClassList();
+      });
+      tdCls.appendChild(clsInput);
+      tr.appendChild(tdCls);
+
+      // assignment / notes (contenteditable)
+      ["assignment","notes"].forEach(function(col){
+        var td = document.createElement("td");
+        td.appendChild(makeEditableCell(row, i, col));
+        tr.appendChild(td);
+      });
+
+      tbody.appendChild(tr);
+    });
+
+    refreshClassList();
+    rowCountEl.textContent = data.length + (data.length === 1 ? " row" : " rows");
+    tableScroll.scrollTop = scrollPos;
+  }
+
+  function makeEditableCell(row, i, col){
+    var div = document.createElement("div");
+    div.className = "cell";
+    div.contentEditable = "true";
+    div.setAttribute("data-placeholder", placeholderFor(col));
+    div.textContent = row[col] || "";
+    if(!row[col]) div.classList.add("empty");
+
+    div.addEventListener("focus", function(){
+      lastFocused = {rowIndex:i, col:col};
+    });
+    div.addEventListener("input", function(){
+      div.classList.toggle("empty", div.textContent.trim() === "");
+    });
+    div.addEventListener("blur", function(){
+      row[col] = div.textContent.trim();
+      div.classList.toggle("empty", row[col] === "");
+      saveToStorage();
+    });
+    div.addEventListener("keydown", function(e){
+      if(e.key === "Enter" && !e.shiftKey){
+        e.preventDefault();
+        div.blur();
+      }
+    });
+    return div;
+  }
+
+  // ---------- toolbar actions ----------
+
+  document.getElementById("btnAddRow").addEventListener("click", function(){
+    data.push({start:"", end:"", cls:"", assignment:"", notes:""});
+    saveToStorage();
+    render(true);
+    // scroll new row into view
+    tableScroll.scrollTop = tableScroll.scrollHeight;
+    // focus the new row's start cell
+    var rows = tbody.querySelectorAll("tr");
+    var lastRow = rows[rows.length - 1];
+    if(lastRow){
+      var cell = lastRow.querySelectorAll(".cell")[0];
+      if(cell) cell.focus();
+    }
+  });
+
+  document.getElementById("btnInsertNow").addEventListener("click", function(){
+    var now = formatNow();
+    if(!lastFocused || !data[lastFocused.rowIndex]){
+      // no cell selected: create a row and stamp its start time
+      data.push({start:now, end:"", cls:"", assignment:"", notes:""});
+      saveToStorage();
+      render(true);
+      tableScroll.scrollTop = tableScroll.scrollHeight;
+      return;
+    }
+    data[lastFocused.rowIndex][lastFocused.col] = now;
+    saveToStorage();
+    render(true);
+  });
+
+  document.getElementById("btnBackup").addEventListener("click", function(){
+    downloadCsv();
+  });
+
+  document.getElementById("btnLoadCsv").addEventListener("click", function(){
+    fileInput.value = "";
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", function(){
+    var file = fileInput.files[0];
+    if(!file) return;
+    var reader = new FileReader();
+    reader.onload = function(e){
+      try{
+        var rows = parseCsv(String(e.target.result));
+        if(!rows.length){
+          alert("That CSV file did not contain any rows.");
+          return;
+        }
+        // drop header row if it looks like a header
+        var start = 0;
+        var first = rows[0].map(function(s){ return s.trim().toLowerCase(); });
+        if(first[0] === "start time" || first[0] === "start"){ start = 1; }
+
+        var imported = [];
+        for(var r = start; r < rows.length; r++){
+          var cols = rows[r];
+          if(cols.length === 1 && cols[0].trim() === "") continue;
+          imported.push({
+            start: cols[0] || "",
+            end: cols[1] || "",
+            cls: cols[2] || "",
+            assignment: cols[3] || "",
+            notes: cols[4] || ""
+          });
+        }
+        data = imported;
+        saveToStorage();
+        render(false);
+        tableScroll.scrollTop = 0;
+        statusText.textContent = "Restored from " + file.name;
+      }catch(err){
+        alert("Could not read that CSV file. Please check its formatting.");
+      }
+    };
+    reader.readAsText(file);
+  });
+
+  // ---------- CSV helpers ----------
+
+  function csvEscape(value){
+    var s = (value === undefined || value === null) ? "" : String(value);
+    if(/[",\n]/.test(s)){
+      s = '"' + s.replace(/"/g, '""') + '"';
+    }
+    return s;
+  }
+
+  function downloadCsv(){
+    var header = ["Start Time","End Time","Class","Assignment","Notes"];
+    var lines = [header.map(csvEscape).join(",")];
+    data.forEach(function(row){
+      lines.push(COLUMNS.map(function(c){ return csvEscape(row[c]); }).join(","));
+    });
+    var csvContent = lines.join("\r\n");
+    var blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
+    var url = URL.createObjectURL(blob);
+    var d = new Date();
+    var filename = "worklog_backup_" + d.getFullYear() + "-" + pad(d.getMonth()+1) + "-" + pad(d.getDate()) + ".csv";
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    statusText.textContent = "Backed up as " + filename;
+  }
+
+  // simple RFC4180-ish CSV parser: handles quoted fields, commas, escaped quotes, CRLF/LF
+  function parseCsv(text){
+    var rows = [];
+    var row = [];
+    var field = "";
+    var inQuotes = false;
+    var i = 0;
+    var n = text.length;
+
+    while(i < n){
+      var c = text[i];
+
+      if(inQuotes){
+        if(c === '"'){
+          if(text[i+1] === '"'){ field += '"'; i += 2; continue; }
+          inQuotes = false; i++; continue;
+        }
+        field += c; i++; continue;
+      }else{
+        if(c === '"'){ inQuotes = true; i++; continue; }
+        if(c === ','){ row.push(field); field = ""; i++; continue; }
+        if(c === '\r'){ i++; continue; }
+        if(c === '\n'){
+          row.push(field); field = "";
+          rows.push(row); row = [];
+          i++; continue;
+        }
+        field += c; i++; continue;
+      }
+    }
+    // trailing field/row
+    if(field.length || row.length){
+      row.push(field);
+      rows.push(row);
+    }
+    // drop fully empty trailing rows
+    while(rows.length && rows[rows.length-1].every(function(f){ return f.trim() === ""; })){
+      rows.pop();
+    }
+    return rows;
+  }
+
+  // ---------- init ----------
+
+  data = loadFromStorage();
+  render(false);
+  tableScroll.scrollTop = 0;
+})();
+</script>
+</body>
+</html>
