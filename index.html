@@ -39,7 +39,7 @@
     align-items:flex-end;
     border-bottom:2px solid var(--ink);
     padding-bottom:0.9rem;
-    margin-bottom:1.4rem;
+    margin-bottom:0.9rem;
     gap:1rem;
     flex-wrap:wrap;
   }
@@ -70,12 +70,42 @@
     margin-right:0.4em;
   }
 
+  .user-bar{
+    display:flex;
+    gap:1.6rem;
+    flex-wrap:wrap;
+    margin-bottom:1.4rem;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .user-bar label{
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    color:#8a8878;
+    display:flex;
+    flex-direction:column;
+    gap:0.25rem;
+  }
+  .user-bar input{
+    font-family:"Iowan Old Style","Georgia",serif;
+    font-size:0.95rem;
+    border:none;
+    border-bottom:1px solid var(--line);
+    background:transparent;
+    padding:0.2rem 0.1rem;
+    outline:none;
+    color:var(--ink);
+    min-width:160px;
+  }
+  .user-bar input:focus{ border-bottom-color:var(--amber); }
+
   .toolbar{
     display:flex;
     flex-wrap:wrap;
     gap:0.6rem;
     margin-bottom:1rem;
+    align-items:center;
   }
+  .toolbar .spacer{ flex:1 1 auto; }
   button{
     font-family:"Helvetica Neue",Arial,sans-serif;
     font-size:0.85rem;
@@ -93,6 +123,8 @@
   button.primary:hover{ background:var(--moss-dark); border-color:var(--moss-dark); }
   button.ghost{ border-color:var(--line); color:#57564c; }
   button.ghost:hover{ background:var(--ink); border-color:var(--ink); color:var(--paper); }
+  button.toggle{ border-color:var(--rust); color:var(--rust); background:transparent; }
+  button.toggle:hover{ background:var(--rust); color:#fff; }
   button.danger-text{
     border:none;background:none;color:#a4522a;padding:0.2rem 0.4rem;font-size:0.95rem;
   }
@@ -102,7 +134,7 @@
     border:1px solid var(--ink);
   }
   .table-scroll{
-    max-height:60vh;
+    max-height:55vh;
     overflow-y:auto;
     overflow-x:auto;
   }
@@ -179,6 +211,61 @@
     font-size:0.88rem;
   }
 
+  .summary{
+    margin-top:1.8rem;
+    border-top:2px solid var(--ink);
+    padding-top:1.1rem;
+  }
+  .summary h2{
+    font-size:1.15rem;
+    margin:0 0 0.8rem;
+    font-weight:600;
+  }
+  .summary-controls{
+    display:flex;
+    gap:1.2rem;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+  }
+  .summary-controls label{
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    color:#8a8878;
+    display:flex;
+    flex-direction:column;
+    gap:0.3rem;
+  }
+  .summary-controls select{
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.88rem;
+    padding:0.5rem 0.6rem;
+    border:1px solid var(--line);
+    background:var(--paper);
+    color:var(--ink);
+    min-width:180px;
+  }
+  .summary-result{
+    margin-top:1rem;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:0.92rem;
+    padding:0.9rem 1rem;
+    background:var(--row-alt);
+    border-left:3px solid var(--moss);
+    min-height:1.2em;
+  }
+  .summary-result .big{
+    font-family:"Iowan Old Style","Georgia",serif;
+    font-size:1.5rem;
+    color:var(--moss-dark);
+    display:block;
+    margin-bottom:0.2rem;
+  }
+  .summary-result .note{
+    color:#8a8878;
+    font-size:0.78rem;
+  }
+
   footer{
     margin-top:1.1rem;
     font-family:"Helvetica Neue",Arial,sans-serif;
@@ -209,11 +296,22 @@
     </div>
   </header>
 
+  <div class="user-bar">
+    <label>First name
+      <input type="text" id="firstName" placeholder="First name">
+    </label>
+    <label>Last name
+      <input type="text" id="lastName" placeholder="Last name">
+    </label>
+  </div>
+
   <div class="toolbar">
     <button class="primary" id="btnAddRow">+ Add work event</button>
     <button class="ghost" id="btnInsertNow">Insert current date &amp; time</button>
     <button id="btnBackup">Backup to CSV</button>
     <button id="btnLoadCsv">Load from CSV</button>
+    <span class="spacer"></span>
+    <button class="toggle" id="btnToggleLabels">Switch to general labels</button>
     <input type="file" id="file-input" accept=".csv,text/csv">
   </div>
 
@@ -225,8 +323,8 @@
             <th class="col-del"></th>
             <th>Start time</th>
             <th>End time</th>
-            <th>Class</th>
-            <th>Assignment</th>
+            <th id="thClass">Class</th>
+            <th id="thAssignment">Assignment</th>
             <th>Notes</th>
           </tr>
         </thead>
@@ -242,27 +340,71 @@
     <span>Click any cell to edit it directly.</span>
     <span id="rowCount">0 rows</span>
   </footer>
+
+  <section class="summary">
+    <h2 id="summaryTitle">Time spent</h2>
+    <div class="summary-controls">
+      <label id="filterClassLabel">Class
+        <select id="filterClass"><option value="">Any</option></select>
+      </label>
+      <label id="filterAssignmentLabel">Assignment
+        <select id="filterAssignment"><option value="">Any</option></select>
+      </label>
+      <button class="primary" id="btnCalc">Calculate</button>
+    </div>
+    <div class="summary-result" id="summaryResult">Pick a class and/or an assignment above, then calculate.</div>
+  </section>
 </div>
 
 <datalist id="classesList"></datalist>
+<datalist id="assignmentsList"></datalist>
 
 <script>
 (function(){
   "use strict";
 
   var STORAGE_KEY = "worklog_data_v1";
+  var USER_KEY = "worklog_user_v1";
+  var LABEL_KEY = "worklog_label_mode_v1";
   var COLUMNS = ["start","end","cls","assignment","notes"];
+
+  var LABELS = {
+    school: {
+      cls:"Class", assignment:"Assignment",
+      clsPlaceholder:"class", assignmentPlaceholder:"assignment",
+      toggleText:"Switch to general labels",
+      filterClsLabel:"Class", filterAssignmentLabel:"Assignment"
+    },
+    general: {
+      cls:"Category", assignment:"Activity",
+      clsPlaceholder:"category", assignmentPlaceholder:"activity",
+      toggleText:"Switch to school labels",
+      filterClsLabel:"Category", filterAssignmentLabel:"Activity"
+    }
+  };
 
   var tbody = document.getElementById("tbody");
   var tableScroll = document.getElementById("tableScroll");
   var emptyState = document.getElementById("emptyState");
   var classesList = document.getElementById("classesList");
+  var assignmentsList = document.getElementById("assignmentsList");
   var rowCountEl = document.getElementById("rowCount");
   var statusText = document.getElementById("statusText");
   var fileInput = document.getElementById("file-input");
+  var firstNameInput = document.getElementById("firstName");
+  var lastNameInput = document.getElementById("lastName");
+  var thClass = document.getElementById("thClass");
+  var thAssignment = document.getElementById("thAssignment");
+  var btnToggleLabels = document.getElementById("btnToggleLabels");
+  var filterClassSelect = document.getElementById("filterClass");
+  var filterAssignmentSelect = document.getElementById("filterAssignment");
+  var filterClassLabelEl = document.getElementById("filterClassLabel");
+  var filterAssignmentLabelEl = document.getElementById("filterAssignmentLabel");
+  var summaryResult = document.getElementById("summaryResult");
 
   var data = [];          // array of {start,end,cls,assignment,notes}
   var lastFocused = null; // {rowIndex, col} of the last focused editable field
+  var labelMode = "school";
 
   // ---------- persistence ----------
 
@@ -286,6 +428,63 @@
     }
   }
 
+  function loadUser(){
+    try{
+      var raw = localStorage.getItem(USER_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        firstNameInput.value = parsed.first || "";
+        lastNameInput.value = parsed.last || "";
+      }
+    }catch(e){ /* ignore */ }
+  }
+
+  function saveUser(){
+    try{
+      localStorage.setItem(USER_KEY, JSON.stringify({
+        first: firstNameInput.value.trim(),
+        last: lastNameInput.value.trim()
+      }));
+    }catch(e){ /* ignore */ }
+  }
+
+  function loadLabelMode(){
+    try{
+      var stored = localStorage.getItem(LABEL_KEY);
+      if(stored === "school" || stored === "general") return stored;
+    }catch(e){ /* ignore */ }
+    return "school";
+  }
+
+  function saveLabelMode(){
+    try{ localStorage.setItem(LABEL_KEY, labelMode); }catch(e){ /* ignore */ }
+  }
+
+  // ---------- label mode ----------
+
+  function applyLabels(){
+    var L = LABELS[labelMode];
+    thClass.textContent = L.cls;
+    thAssignment.textContent = L.assignment;
+    btnToggleLabels.textContent = L.toggleText;
+    filterClassLabelEl.firstChild.textContent = L.filterClsLabel + " ";
+    filterAssignmentLabelEl.firstChild.textContent = L.filterAssignmentLabel + " ";
+  }
+
+  btnToggleLabels.addEventListener("click", function(){
+    labelMode = (labelMode === "school") ? "general" : "school";
+    saveLabelMode();
+    applyLabels();
+    render(true);
+  });
+
+  // ---------- user name ----------
+
+  firstNameInput.addEventListener("blur", saveUser);
+  lastNameInput.addEventListener("blur", saveUser);
+  firstNameInput.addEventListener("input", saveUser);
+  lastNameInput.addEventListener("input", saveUser);
+
   // ---------- rendering ----------
 
   function pad(n){ return n < 10 ? "0"+n : ""+n; }
@@ -296,29 +495,57 @@
            pad(d.getHours())+":"+pad(d.getMinutes());
   }
 
-  function uniqueClasses(){
+  function uniqueValues(field){
     var seen = {};
     var out = [];
     data.forEach(function(r){
-      var c = (r.cls||"").trim();
-      if(c && !seen[c]){ seen[c] = true; out.push(c); }
+      var v = (r[field]||"").trim();
+      if(v && !seen[v]){ seen[v] = true; out.push(v); }
     });
     return out;
   }
 
-  function refreshClassList(){
+  function refreshAuxLists(){
+    var classes = uniqueValues("cls");
+    var assignments = uniqueValues("assignment");
+
     classesList.innerHTML = "";
-    uniqueClasses().forEach(function(c){
+    classes.forEach(function(c){
       var opt = document.createElement("option");
       opt.value = c;
       classesList.appendChild(opt);
     });
+
+    assignmentsList.innerHTML = "";
+    assignments.forEach(function(a){
+      var opt = document.createElement("option");
+      opt.value = a;
+      assignmentsList.appendChild(opt);
+    });
+
+    var prevClassSel = filterClassSelect.value;
+    var prevAssignSel = filterAssignmentSelect.value;
+    filterClassSelect.innerHTML = '<option value="">Any</option>';
+    classes.forEach(function(c){
+      var opt = document.createElement("option");
+      opt.value = c; opt.textContent = c;
+      filterClassSelect.appendChild(opt);
+    });
+    filterAssignmentSelect.innerHTML = '<option value="">Any</option>';
+    assignments.forEach(function(a){
+      var opt = document.createElement("option");
+      opt.value = a; opt.textContent = a;
+      filterAssignmentSelect.appendChild(opt);
+    });
+    if(classes.indexOf(prevClassSel) !== -1) filterClassSelect.value = prevClassSel;
+    if(assignments.indexOf(prevAssignSel) !== -1) filterAssignmentSelect.value = prevAssignSel;
   }
 
   function placeholderFor(col){
+    var L = LABELS[labelMode];
     if(col === "start" || col === "end") return "click to set";
-    if(col === "cls") return "class";
-    if(col === "assignment") return "assignment";
+    if(col === "cls") return L.clsPlaceholder;
+    if(col === "assignment") return L.assignmentPlaceholder;
     return "notes";
   }
 
@@ -355,36 +582,23 @@
 
       // class (input + datalist)
       var tdCls = document.createElement("td");
-      var clsInput = document.createElement("input");
-      clsInput.className = "class-input";
-      clsInput.setAttribute("list", "classesList");
-      clsInput.setAttribute("placeholder", "class");
-      clsInput.value = row.cls || "";
-      clsInput.addEventListener("focus", function(){ lastFocused = {rowIndex:i, col:"cls"}; });
-      clsInput.addEventListener("change", function(){
-        row.cls = clsInput.value;
-        saveToStorage();
-        refreshClassList();
-      });
-      clsInput.addEventListener("blur", function(){
-        row.cls = clsInput.value;
-        saveToStorage();
-        refreshClassList();
-      });
-      tdCls.appendChild(clsInput);
+      tdCls.appendChild(makeDatalistCell(row, i, "cls", "classesList"));
       tr.appendChild(tdCls);
 
-      // assignment / notes (contenteditable)
-      ["assignment","notes"].forEach(function(col){
-        var td = document.createElement("td");
-        td.appendChild(makeEditableCell(row, i, col));
-        tr.appendChild(td);
-      });
+      // assignment (input + datalist)
+      var tdAssign = document.createElement("td");
+      tdAssign.appendChild(makeDatalistCell(row, i, "assignment", "assignmentsList"));
+      tr.appendChild(tdAssign);
+
+      // notes (contenteditable)
+      var tdNotes = document.createElement("td");
+      tdNotes.appendChild(makeEditableCell(row, i, "notes"));
+      tr.appendChild(tdNotes);
 
       tbody.appendChild(tr);
     });
 
-    refreshClassList();
+    refreshAuxLists();
     rowCountEl.textContent = data.length + (data.length === 1 ? " row" : " rows");
     tableScroll.scrollTop = scrollPos;
   }
@@ -417,15 +631,30 @@
     return div;
   }
 
+  function makeDatalistCell(row, i, col, listId){
+    var input = document.createElement("input");
+    input.className = "class-input";
+    input.setAttribute("list", listId);
+    input.setAttribute("placeholder", placeholderFor(col));
+    input.value = row[col] || "";
+    input.addEventListener("focus", function(){ lastFocused = {rowIndex:i, col:col}; });
+    function commit(){
+      row[col] = input.value.trim();
+      saveToStorage();
+      refreshAuxLists();
+    }
+    input.addEventListener("change", commit);
+    input.addEventListener("blur", commit);
+    return input;
+  }
+
   // ---------- toolbar actions ----------
 
   document.getElementById("btnAddRow").addEventListener("click", function(){
     data.push({start:"", end:"", cls:"", assignment:"", notes:""});
     saveToStorage();
     render(true);
-    // scroll new row into view
     tableScroll.scrollTop = tableScroll.scrollHeight;
-    // focus the new row's start cell
     var rows = tbody.querySelectorAll("tr");
     var lastRow = rows[rows.length - 1];
     if(lastRow){
@@ -437,7 +666,6 @@
   document.getElementById("btnInsertNow").addEventListener("click", function(){
     var now = formatNow();
     if(!lastFocused || !data[lastFocused.rowIndex]){
-      // no cell selected: create a row and stamp its start time
       data.push({start:now, end:"", cls:"", assignment:"", notes:""});
       saveToStorage();
       render(true);
@@ -469,7 +697,6 @@
           alert("That CSV file did not contain any rows.");
           return;
         }
-        // drop header row if it looks like a header
         var start = 0;
         var first = rows[0].map(function(s){ return s.trim().toLowerCase(); });
         if(first[0] === "start time" || first[0] === "start"){ start = 1; }
@@ -496,6 +723,71 @@
       }
     };
     reader.readAsText(file);
+  });
+
+  // ---------- summary / time spent ----------
+
+  function tryParseDate(str){
+    if(!str) return null;
+    var s = str.trim();
+    if(!s) return null;
+    var t = Date.parse(s);
+    if(!isNaN(t)) return new Date(t);
+    // try "YYYY-MM-DD HH:MM" style with a space instead of T
+    var alt = s.replace(" ", "T");
+    t = Date.parse(alt);
+    if(!isNaN(t)) return new Date(t);
+    return null;
+  }
+
+  document.getElementById("btnCalc").addEventListener("click", function(){
+    var selCls = filterClassSelect.value;
+    var selAssign = filterAssignmentSelect.value;
+    var L = LABELS[labelMode];
+
+    if(!selCls && !selAssign){
+      summaryResult.innerHTML = 'Pick a ' + L.filterClsLabel.toLowerCase() + ' and/or an ' +
+        L.filterAssignmentLabel.toLowerCase() + ' above, then calculate.';
+      return;
+    }
+
+    var matched = data.filter(function(row){
+      if(selCls && (row.cls||"").trim() !== selCls) return false;
+      if(selAssign && (row.assignment||"").trim() !== selAssign) return false;
+      return true;
+    });
+
+    var totalMs = 0;
+    var counted = 0;
+    var skipped = 0;
+
+    matched.forEach(function(row){
+      var s = tryParseDate(row.start);
+      var e = tryParseDate(row.end);
+      if(!s || !e || e.getTime() <= s.getTime()){
+        skipped++;
+        return;
+      }
+      totalMs += (e.getTime() - s.getTime());
+      counted++;
+    });
+
+    var totalMinutes = Math.round(totalMs / 60000);
+    var hrs = Math.floor(totalMinutes / 60);
+    var mins = totalMinutes % 60;
+
+    var what = [];
+    if(selCls) what.push(L.filterClsLabel + ' "' + selCls + '"');
+    if(selAssign) what.push(L.filterAssignmentLabel + ' "' + selAssign + '"');
+
+    var html = '<span class="big">' + hrs + ' hr ' + mins + ' min</span>';
+    html += counted + ' of ' + matched.length + ' matching ' + (matched.length === 1 ? 'entry' : 'entries') +
+            ' for ' + what.join(" + ") + '.';
+    if(skipped){
+      html += '<div class="note">' + skipped + ' matching ' + (skipped === 1 ? 'entry has' : 'entries have') +
+              ' start/end times that could not be read as full dates, so they were left out of the total.</div>';
+    }
+    summaryResult.innerHTML = html;
   });
 
   // ---------- CSV helpers ----------
@@ -559,12 +851,10 @@
         field += c; i++; continue;
       }
     }
-    // trailing field/row
     if(field.length || row.length){
       row.push(field);
       rows.push(row);
     }
-    // drop fully empty trailing rows
     while(rows.length && rows[rows.length-1].every(function(f){ return f.trim() === ""; })){
       rows.pop();
     }
@@ -573,6 +863,9 @@
 
   // ---------- init ----------
 
+  labelMode = loadLabelMode();
+  applyLabels();
+  loadUser();
   data = loadFromStorage();
   render(false);
   tableScroll.scrollTop = 0;
