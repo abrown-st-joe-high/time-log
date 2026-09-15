@@ -29,92 +29,32 @@
     align-items:center;
     padding:2.5rem 1rem 4rem;
   }
-  .wrap{
-    width:100%;
-    max-width:1080px;
-  }
+  .wrap{ width:100%; max-width:1080px; }
   header{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
+    display:flex; justify-content:space-between; align-items:flex-end;
     border-bottom:2px solid var(--ink);
-    padding-bottom:0.9rem;
-    margin-bottom:0.9rem;
-    gap:1rem;
-    flex-wrap:wrap;
+    padding-bottom:0.9rem; margin-bottom:0.9rem; gap:1rem; flex-wrap:wrap;
   }
-  h1{
-    font-size:1.9rem;
-    font-weight:600;
-    letter-spacing:0.01em;
-    margin:0;
-  }
-  .subtitle{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.82rem;
-    color:#6b6a5f;
-    margin-top:0.3rem;
-  }
-  .status{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.78rem;
-    color:#6b6a5f;
-    text-align:right;
-    min-width:150px;
-  }
-  .status .dot{
-    display:inline-block;
-    width:7px;height:7px;
-    border-radius:50%;
-    background:var(--moss);
-    margin-right:0.4em;
-  }
+  h1{ font-size:1.9rem; font-weight:600; letter-spacing:0.01em; margin:0; }
+  .subtitle{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.82rem; color:#6b6a5f; margin-top:0.3rem; }
+  .status{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.78rem; color:#6b6a5f; text-align:right; min-width:150px; }
+  .status .dot{ display:inline-block; width:7px;height:7px; border-radius:50%; background:var(--moss); margin-right:0.4em; }
 
-  .user-bar{
-    display:flex;
-    gap:1.6rem;
-    flex-wrap:wrap;
-    margin-bottom:1.4rem;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-  }
-  .user-bar label{
-    font-size:0.72rem;
-    letter-spacing:0.03em;
-    color:#8a8878;
-    display:flex;
-    flex-direction:column;
-    gap:0.25rem;
-  }
+  .user-bar{ display:flex; gap:1.6rem; flex-wrap:wrap; margin-bottom:1.4rem; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .user-bar label{ font-size:0.72rem; letter-spacing:0.03em; color:#8a8878; display:flex; flex-direction:column; gap:0.25rem; }
   .user-bar input{
-    font-family:"Iowan Old Style","Georgia",serif;
-    font-size:0.95rem;
-    border:none;
-    border-bottom:1px solid var(--line);
-    background:transparent;
-    padding:0.2rem 0.1rem;
-    outline:none;
-    color:var(--ink);
-    min-width:160px;
+    font-family:"Iowan Old Style","Georgia",serif; font-size:0.95rem; border:none;
+    border-bottom:1px solid var(--line); background:transparent; padding:0.2rem 0.1rem;
+    outline:none; color:var(--ink); min-width:160px;
   }
   .user-bar input:focus{ border-bottom-color:var(--amber); }
 
-  .toolbar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:0.6rem;
-    margin-bottom:1rem;
-    align-items:center;
-  }
+  .toolbar{ display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:0.6rem; align-items:center; }
   .toolbar .spacer{ flex:1 1 auto; }
   button{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.85rem;
-    border:1px solid var(--ink);
-    background:var(--paper);
-    color:var(--ink);
-    padding:0.55rem 1rem;
-    cursor:pointer;
-    border-radius:2px;
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.85rem;
+    border:1px solid var(--ink); background:var(--paper); color:var(--ink);
+    padding:0.55rem 1rem; cursor:pointer; border-radius:2px;
     transition:background 0.12s ease, color 0.12s ease, transform 0.05s ease;
   }
   button:hover{ background:var(--ink); color:var(--paper); }
@@ -125,158 +65,94 @@
   button.ghost:hover{ background:var(--ink); border-color:var(--ink); color:var(--paper); }
   button.toggle{ border-color:var(--rust); color:var(--rust); background:transparent; }
   button.toggle:hover{ background:var(--rust); color:#fff; }
-  button.danger-text{
-    border:none;background:none;color:#a4522a;padding:0.2rem 0.4rem;font-size:0.95rem;
-  }
+  button.danger-text{ border:none;background:none;color:#a4522a;padding:0.2rem 0.4rem;font-size:0.95rem; }
   button.danger-text:hover{ background:#f1e2da; color:#a4522a; }
+  .hint-row{ font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.74rem; color:#8a8878; margin-bottom:0.9rem; }
 
-  .table-shell{
-    border:1px solid var(--ink);
-  }
-  .table-scroll{
-    max-height:55vh;
-    overflow-y:auto;
-    overflow-x:auto;
-  }
-  table{
-    border-collapse:collapse;
-    width:100%;
-    min-width:800px;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.88rem;
-  }
+  .table-shell{ border:1px solid var(--ink); }
+  .table-scroll{ max-height:55vh; overflow-y:auto; overflow-x:auto; }
+  table{ border-collapse:collapse; table-layout:fixed; font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.88rem; }
   thead th{
-    position:sticky;
-    top:0;
-    background:var(--ink);
-    color:var(--paper);
-    text-align:left;
-    font-weight:500;
-    font-size:0.72rem;
-    letter-spacing:0.03em;
-    padding:0.65rem 0.7rem;
-    z-index:2;
-    white-space:nowrap;
+    position:sticky; top:0; background:var(--ink); color:var(--paper);
+    text-align:left; font-weight:500; font-size:0.72rem; letter-spacing:0.03em;
+    padding:0.65rem 0.9rem 0.65rem 0.7rem; z-index:2; white-space:nowrap;
+    overflow:hidden; text-overflow:ellipsis;
   }
-  thead th.col-del{ width:2.2rem; }
+  thead th.resizable{ position:relative; }
+  thead th.col-del{ width:40px; }
+  .col-resizer{ position:absolute; top:0; right:-3px; width:7px; height:100%; cursor:col-resize; z-index:4; }
+  .col-resizer:hover, .col-resizer.active{ background:rgba(251,250,246,0.28); }
   tbody tr{ border-bottom:1px solid var(--line-soft); }
   tbody tr:nth-child(even){ background:var(--row-alt); }
   tbody tr:hover{ background:#eef1e6; }
-  td{
-    padding:0;
-    border-right:1px solid var(--line-soft);
-    vertical-align:top;
-  }
+  td{ padding:0; border-right:1px solid var(--line-soft); vertical-align:top; overflow:hidden; }
   td:last-of-type{ border-right:none; }
   .cell{
-    display:block;
-    width:100%;
-    min-width:100px;
-    padding:0.55rem 0.7rem;
-    outline:none;
-    white-space:pre-wrap;
-    word-break:break-word;
-    min-height:1.6em;
-    cursor:text;
+    display:block; width:100%; padding:0.55rem 0.7rem; outline:none;
+    white-space:pre-wrap; word-break:break-word; min-height:1.6em; cursor:text;
   }
-  .cell:focus{
-    background:#fff8e6;
-    box-shadow:inset 0 0 0 1.5px var(--amber);
-  }
-  .cell.empty::before{
-    content:attr(data-placeholder);
-    color:#a6a495;
-  }
-  td.time-col .cell{ font-variant-numeric:tabular-nums; white-space:nowrap; }
-  .class-input{
-    width:100%;
-    min-width:110px;
-    border:none;
-    background:transparent;
-    font:inherit;
-    padding:0.55rem 0.7rem;
-    outline:none;
-  }
-  .class-input:focus{
-    background:#fff8e6;
-    box-shadow:inset 0 0 0 1.5px var(--amber);
-  }
+  .cell:focus{ background:#fff8e6; box-shadow:inset 0 0 0 1.5px var(--amber); }
+  .cell.empty::before{ content:attr(data-placeholder); color:#a6a495; }
+  td.time-col .cell{ font-variant-numeric:tabular-nums; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .class-input{ width:100%; border:none; background:transparent; font:inherit; padding:0.55rem 0.7rem; outline:none; }
+  .class-input:focus{ background:#fff8e6; box-shadow:inset 0 0 0 1.5px var(--amber); }
   td.col-del{ text-align:center; }
 
-  .empty-state{
-    padding:2.2rem 1rem;
-    text-align:center;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    color:#8a8878;
-    font-size:0.88rem;
-  }
+  .empty-state{ padding:2.2rem 1rem; text-align:center; font-family:"Helvetica Neue",Arial,sans-serif; color:#8a8878; font-size:0.88rem; }
 
-  .summary{
-    margin-top:1.8rem;
-    border-top:2px solid var(--ink);
-    padding-top:1.1rem;
-  }
-  .summary h2{
-    font-size:1.15rem;
-    margin:0 0 0.8rem;
-    font-weight:600;
-  }
-  .summary-controls{
-    display:flex;
-    gap:1.2rem;
-    flex-wrap:wrap;
-    align-items:flex-end;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-  }
-  .summary-controls label{
-    font-size:0.72rem;
-    letter-spacing:0.03em;
-    color:#8a8878;
-    display:flex;
-    flex-direction:column;
-    gap:0.3rem;
-  }
+  .summary{ margin-top:1.8rem; border-top:2px solid var(--ink); padding-top:1.1rem; }
+  .summary h2{ font-size:1.15rem; margin:0 0 0.8rem; font-weight:600; }
+  .summary-controls{ display:flex; gap:1.2rem; flex-wrap:wrap; align-items:flex-end; font-family:"Helvetica Neue",Arial,sans-serif; }
+  .summary-controls label{ font-size:0.72rem; letter-spacing:0.03em; color:#8a8878; display:flex; flex-direction:column; gap:0.3rem; }
   .summary-controls select{
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.88rem;
-    padding:0.5rem 0.6rem;
-    border:1px solid var(--line);
-    background:var(--paper);
-    color:var(--ink);
-    min-width:180px;
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.88rem; padding:0.5rem 0.6rem;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink); min-width:180px;
   }
   .summary-result{
-    margin-top:1rem;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.92rem;
-    padding:0.9rem 1rem;
-    background:var(--row-alt);
-    border-left:3px solid var(--moss);
-    min-height:1.2em;
+    margin-top:1rem; font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.92rem;
+    padding:0.9rem 1rem; background:var(--row-alt); border-left:3px solid var(--moss); min-height:1.2em;
   }
-  .summary-result .big{
-    font-family:"Iowan Old Style","Georgia",serif;
-    font-size:1.5rem;
-    color:var(--moss-dark);
-    display:block;
-    margin-bottom:0.2rem;
-  }
-  .summary-result .note{
-    color:#8a8878;
-    font-size:0.78rem;
-  }
+  .summary-result .big{ font-family:"Iowan Old Style","Georgia",serif; font-size:1.5rem; color:var(--moss-dark); display:block; margin-bottom:0.2rem; }
+  .summary-result .note{ color:#8a8878; font-size:0.78rem; }
 
   footer{
-    margin-top:1.1rem;
-    font-family:"Helvetica Neue",Arial,sans-serif;
-    font-size:0.76rem;
-    color:#8a8878;
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:0.5rem;
+    margin-top:1.1rem; font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.76rem; color:#8a8878;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;
   }
   #file-input{ display:none; }
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(28,31,26,0.55); display:none;
+    align-items:center; justify-content:center; z-index:50; padding:1rem;
+  }
+  .modal-overlay.visible{ display:flex; }
+  .modal-box{
+    background:var(--paper); border:1px solid var(--ink); padding:1.6rem;
+    max-width:380px; width:100%; font-family:"Helvetica Neue",Arial,sans-serif;
+    box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  }
+  .modal-box.wide{ max-width:540px; }
+  .modal-box h3{ margin:0 0 0.6rem; font-family:"Iowan Old Style","Georgia",serif; font-size:1.25rem; color:var(--ink); }
+  .modal-box p{ margin:0 0 1.3rem; font-size:0.88rem; color:#57564c; line-height:1.45; }
+  .modal-actions{ display:flex; justify-content:flex-end; gap:0.6rem; }
+
+  .time-picker-row{ display:flex; gap:1rem; margin-bottom:1.3rem; flex-wrap:wrap; }
+  .time-picker-row label{ display:flex; flex-direction:column; gap:0.3rem; font-size:0.72rem; color:#8a8878; letter-spacing:0.03em; }
+  .time-picker-row input{
+    font-family:"Helvetica Neue",Arial,sans-serif; font-size:0.92rem; padding:0.5rem 0.6rem;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink);
+  }
+
+  .manage-columns{ display:flex; gap:1.4rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .manage-columns > div{ flex:1 1 200px; min-width:0; }
+  .manage-columns h4{ font-size:0.72rem; letter-spacing:0.04em; color:#8a8878; margin:0 0 0.4rem; font-weight:600; }
+  .chip-list{ list-style:none; margin:0; padding:0; max-height:220px; overflow-y:auto; border:1px solid var(--line-soft); }
+  .chip-list li{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:0.4rem 0.6rem; font-size:0.85rem; border-bottom:1px solid var(--line-soft);
+  }
+  .chip-list li:last-child{ border-bottom:none; }
+  .chip-list .empty-note{ padding:0.6rem; color:#a6a495; font-size:0.8rem; }
 
   @media (max-width:600px){
     h1{ font-size:1.5rem; }
@@ -308,24 +184,37 @@
   <div class="toolbar">
     <button class="primary" id="btnAddRow">+ Add work event</button>
     <button class="ghost" id="btnInsertNow">Insert current date &amp; time</button>
+    <button class="ghost" id="btnConnectTime">Connect time</button>
+    <button class="ghost" id="btnInsertPrev">Insert previous time</button>
     <button id="btnBackup">Backup to CSV</button>
     <button id="btnLoadCsv">Load from CSV</button>
     <span class="spacer"></span>
+    <button class="ghost" id="btnManageLists">Manage lists</button>
     <button class="toggle" id="btnToggleLabels">Switch to general labels</button>
+    <button class="toggle" id="btnClearAll">Clear all</button>
     <input type="file" id="file-input" accept=".csv,text/csv">
   </div>
+  <div class="hint-row">New events are added to the top of the log. Drag a column's right edge to resize it, or double-click that edge to fit its contents. Click a cell, then use a time button to fill it.</div>
 
   <div class="table-shell">
     <div class="table-scroll" id="tableScroll">
-      <table>
+      <table id="worklogTable">
+        <colgroup>
+          <col id="colDel" style="width:40px;">
+          <col id="colStart">
+          <col id="colEnd">
+          <col id="colCls">
+          <col id="colAssignment">
+          <col id="colNotes">
+        </colgroup>
         <thead>
           <tr>
             <th class="col-del"></th>
-            <th>Start time</th>
-            <th>End time</th>
-            <th id="thClass">Class</th>
-            <th id="thAssignment">Assignment</th>
-            <th>Notes</th>
+            <th class="resizable" id="thStart">Start time<div class="col-resizer" data-col="start"></div></th>
+            <th class="resizable" id="thEnd">End time<div class="col-resizer" data-col="end"></div></th>
+            <th class="resizable" id="thClass">Class<div class="col-resizer" data-col="cls"></div></th>
+            <th class="resizable" id="thAssignment">Assignment<div class="col-resizer" data-col="assignment"></div></th>
+            <th class="resizable" id="thNotes">Notes<div class="col-resizer" data-col="notes"></div></th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -359,6 +248,52 @@
 <datalist id="classesList"></datalist>
 <datalist id="assignmentsList"></datalist>
 
+<div class="modal-overlay" id="clearModal">
+  <div class="modal-box">
+    <h3>Clear all entries?</h3>
+    <p>This removes every row from the log on this device. It can't be undone — back up to CSV first if there's anything worth keeping.</p>
+    <div class="modal-actions">
+      <button class="ghost" id="btnClearCancel">Cancel</button>
+      <button class="toggle" id="btnClearConfirm">Yes, clear everything</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="insertTimeModal">
+  <div class="modal-box">
+    <h3>Insert a specific time</h3>
+    <p>Pick a date and time to drop into the cell that was last clicked, formatted consistently with the rest of the log.</p>
+    <div class="time-picker-row">
+      <label>Date <input type="date" id="pickDate"></label>
+      <label>Time <input type="time" id="pickTime"></label>
+    </div>
+    <div class="modal-actions">
+      <button class="ghost" id="btnInsertTimeCancel">Cancel</button>
+      <button class="primary" id="btnInsertTimeConfirm">Insert</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="manageModal">
+  <div class="modal-box wide">
+    <h3>Manage dropdown lists</h3>
+    <p>Remove items no longer needed from the suggestion lists below. This only affects the suggestions — it doesn't change anything already logged.</p>
+    <div class="manage-columns">
+      <div>
+        <h4 id="manageClsTitle">Classes</h4>
+        <ul class="chip-list" id="manageClsList"></ul>
+      </div>
+      <div>
+        <h4 id="manageAssignTitle">Assignments</h4>
+        <ul class="chip-list" id="manageAssignList"></ul>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="ghost" id="btnManageClose">Done</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   "use strict";
@@ -366,6 +301,8 @@
   var STORAGE_KEY = "worklog_data_v1";
   var USER_KEY = "worklog_user_v1";
   var LABEL_KEY = "worklog_label_mode_v1";
+  var COLWIDTH_KEY = "worklog_colwidths_v1";
+  var KNOWNLIST_KEY = "worklog_knownlists_v1";
   var COLUMNS = ["start","end","cls","assignment","notes"];
 
   var LABELS = {
@@ -382,6 +319,8 @@
       filterClsLabel:"Category", filterAssignmentLabel:"Activity"
     }
   };
+
+  var DEFAULT_COL_WIDTHS = { start:170, end:170, cls:150, assignment:150, notes:240 };
 
   var tbody = document.getElementById("tbody");
   var tableScroll = document.getElementById("tableScroll");
@@ -401,10 +340,31 @@
   var filterClassLabelEl = document.getElementById("filterClassLabel");
   var filterAssignmentLabelEl = document.getElementById("filterAssignmentLabel");
   var summaryResult = document.getElementById("summaryResult");
+  var worklogTable = document.getElementById("worklogTable");
+  var clearModal = document.getElementById("clearModal");
+  var insertTimeModal = document.getElementById("insertTimeModal");
+  var pickDate = document.getElementById("pickDate");
+  var pickTime = document.getElementById("pickTime");
+  var manageModal = document.getElementById("manageModal");
+  var manageClsTitle = document.getElementById("manageClsTitle");
+  var manageAssignTitle = document.getElementById("manageAssignTitle");
+  var manageClsList = document.getElementById("manageClsList");
+  var manageAssignList = document.getElementById("manageAssignList");
 
-  var data = [];          // array of {start,end,cls,assignment,notes}
+  var colEls = {
+    start: document.getElementById("colStart"),
+    end: document.getElementById("colEnd"),
+    cls: document.getElementById("colCls"),
+    assignment: document.getElementById("colAssignment"),
+    notes: document.getElementById("colNotes")
+  };
+
+  var data = [];          // array of {start,end,cls,assignment,notes} -- newest first
   var lastFocused = null; // {rowIndex, col} of the last focused editable field
   var labelMode = "school";
+  var colWidths = {};
+  var resizing = null;    // {field, startX, startWidth}
+  var knownLists = { cls: [], assignment: [] };
 
   // ---------- persistence ----------
 
@@ -460,15 +420,159 @@
     try{ localStorage.setItem(LABEL_KEY, labelMode); }catch(e){ /* ignore */ }
   }
 
+  function loadColWidths(){
+    var widths = {};
+    for(var k in DEFAULT_COL_WIDTHS){ widths[k] = DEFAULT_COL_WIDTHS[k]; }
+    try{
+      var raw = localStorage.getItem(COLWIDTH_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        for(var key in parsed){
+          if(widths.hasOwnProperty(key) && typeof parsed[key] === "number"){
+            widths[key] = parsed[key];
+          }
+        }
+      }
+    }catch(e){ /* ignore */ }
+    return widths;
+  }
+
+  function saveColWidths(){
+    try{ localStorage.setItem(COLWIDTH_KEY, JSON.stringify(colWidths)); }catch(e){ /* ignore */ }
+  }
+
+  function uniqueValues(field){
+    var seen = {};
+    var out = [];
+    data.forEach(function(r){
+      var v = (r[field]||"").trim();
+      if(v && !seen[v]){ seen[v] = true; out.push(v); }
+    });
+    return out;
+  }
+
+  function loadKnownLists(){
+    try{
+      var raw = localStorage.getItem(KNOWNLIST_KEY);
+      if(raw){
+        var parsed = JSON.parse(raw);
+        return {
+          cls: Array.isArray(parsed.cls) ? parsed.cls : [],
+          assignment: Array.isArray(parsed.assignment) ? parsed.assignment : []
+        };
+      }
+    }catch(e){ /* ignore */ }
+    // first run: seed suggestion lists from whatever is already in the data
+    return { cls: uniqueValues("cls"), assignment: uniqueValues("assignment") };
+  }
+
+  function saveKnownLists(){
+    try{ localStorage.setItem(KNOWNLIST_KEY, JSON.stringify(knownLists)); }catch(e){ /* ignore */ }
+  }
+
+  function addToKnownList(field, value){
+    value = (value || "").trim();
+    if(!value) return;
+    if(knownLists[field].indexOf(value) === -1){
+      knownLists[field].push(value);
+      saveKnownLists();
+    }
+  }
+
+  // ---------- column widths ----------
+
+  function applyColWidths(){
+    for(var key in colEls){ colEls[key].style.width = colWidths[key] + "px"; }
+    updateTableWidth();
+  }
+
+  function updateTableWidth(){
+    var total = 40;
+    for(var key in colWidths){ total += colWidths[key]; }
+    worklogTable.style.width = total + "px";
+  }
+
+  function headerLabelForField(field){
+    var L = LABELS[labelMode];
+    switch(field){
+      case "start": return "Start time";
+      case "end": return "End time";
+      case "cls": return L.cls;
+      case "assignment": return L.assignment;
+      case "notes": return "Notes";
+    }
+    return "";
+  }
+
+  var measureCanvas = null;
+  function measureTextWidth(text, font){
+    if(!measureCanvas) measureCanvas = document.createElement("canvas");
+    var ctx = measureCanvas.getContext("2d");
+    ctx.font = font;
+    return ctx.measureText(text || "").width;
+  }
+
+  function autosizeColumn(field){
+    var headerFont = '600 12px "Helvetica Neue", Arial, sans-serif';
+    var cellFont = '14px "Helvetica Neue", Arial, sans-serif';
+    var maxWidth = measureTextWidth(headerLabelForField(field), headerFont) + 46;
+    data.forEach(function(row){
+      var w = measureTextWidth(row[field] || "", cellFont) + 32;
+      if(w > maxWidth) maxWidth = w;
+    });
+    maxWidth = Math.max(60, Math.min(Math.round(maxWidth), 560));
+    colWidths[field] = maxWidth;
+    applyColWidths();
+    saveColWidths();
+  }
+
+  function attachResizerHandles(){
+    var handles = document.querySelectorAll(".col-resizer");
+    handles.forEach(function(handle){
+      handle.addEventListener("mousedown", function(e){
+        e.preventDefault();
+        var field = handle.getAttribute("data-col");
+        resizing = { field: field, startX: e.clientX, startWidth: colWidths[field] };
+        handle.classList.add("active");
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+      });
+      handle.addEventListener("dblclick", function(e){
+        e.stopPropagation();
+        var field = handle.getAttribute("data-col");
+        autosizeColumn(field);
+      });
+    });
+    document.addEventListener("mousemove", function(e){
+      if(!resizing) return;
+      var delta = e.clientX - resizing.startX;
+      var newWidth = Math.max(50, resizing.startWidth + delta);
+      colWidths[resizing.field] = newWidth;
+      applyColWidths();
+    });
+    document.addEventListener("mouseup", function(){
+      if(resizing){
+        var active = document.querySelector(".col-resizer.active");
+        if(active) active.classList.remove("active");
+        resizing = null;
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+        saveColWidths();
+      }
+    });
+  }
+
   // ---------- label mode ----------
 
   function applyLabels(){
     var L = LABELS[labelMode];
-    thClass.textContent = L.cls;
-    thAssignment.textContent = L.assignment;
+    thClass.firstChild.textContent = L.cls;
+    thAssignment.firstChild.textContent = L.assignment;
     btnToggleLabels.textContent = L.toggleText;
     filterClassLabelEl.firstChild.textContent = L.filterClsLabel + " ";
     filterAssignmentLabelEl.firstChild.textContent = L.filterAssignmentLabel + " ";
+    manageClsTitle.textContent = L.cls + " suggestions";
+    manageAssignTitle.textContent = L.assignment + " suggestions";
   }
 
   btnToggleLabels.addEventListener("click", function(){
@@ -495,50 +599,39 @@
            pad(d.getHours())+":"+pad(d.getMinutes());
   }
 
-  function uniqueValues(field){
-    var seen = {};
-    var out = [];
-    data.forEach(function(r){
-      var v = (r[field]||"").trim();
-      if(v && !seen[v]){ seen[v] = true; out.push(v); }
-    });
-    return out;
-  }
-
   function refreshAuxLists(){
-    var classes = uniqueValues("cls");
-    var assignments = uniqueValues("assignment");
-
     classesList.innerHTML = "";
-    classes.forEach(function(c){
+    knownLists.cls.forEach(function(c){
       var opt = document.createElement("option");
       opt.value = c;
       classesList.appendChild(opt);
     });
 
     assignmentsList.innerHTML = "";
-    assignments.forEach(function(a){
+    knownLists.assignment.forEach(function(a){
       var opt = document.createElement("option");
       opt.value = a;
       assignmentsList.appendChild(opt);
     });
 
+    var classesInData = uniqueValues("cls");
+    var assignmentsInData = uniqueValues("assignment");
     var prevClassSel = filterClassSelect.value;
     var prevAssignSel = filterAssignmentSelect.value;
     filterClassSelect.innerHTML = '<option value="">Any</option>';
-    classes.forEach(function(c){
+    classesInData.forEach(function(c){
       var opt = document.createElement("option");
       opt.value = c; opt.textContent = c;
       filterClassSelect.appendChild(opt);
     });
     filterAssignmentSelect.innerHTML = '<option value="">Any</option>';
-    assignments.forEach(function(a){
+    assignmentsInData.forEach(function(a){
       var opt = document.createElement("option");
       opt.value = a; opt.textContent = a;
       filterAssignmentSelect.appendChild(opt);
     });
-    if(classes.indexOf(prevClassSel) !== -1) filterClassSelect.value = prevClassSel;
-    if(assignments.indexOf(prevAssignSel) !== -1) filterAssignmentSelect.value = prevAssignSel;
+    if(classesInData.indexOf(prevClassSel) !== -1) filterClassSelect.value = prevClassSel;
+    if(assignmentsInData.indexOf(prevAssignSel) !== -1) filterAssignmentSelect.value = prevAssignSel;
   }
 
   function placeholderFor(col){
@@ -557,7 +650,6 @@
     data.forEach(function(row, i){
       var tr = document.createElement("tr");
 
-      // delete button
       var tdDel = document.createElement("td");
       tdDel.className = "col-del";
       var delBtn = document.createElement("button");
@@ -572,7 +664,6 @@
       tdDel.appendChild(delBtn);
       tr.appendChild(tdDel);
 
-      // start / end (contenteditable, time-styled)
       ["start","end"].forEach(function(col){
         var td = document.createElement("td");
         td.className = "time-col";
@@ -580,17 +671,14 @@
         tr.appendChild(td);
       });
 
-      // class (input + datalist)
       var tdCls = document.createElement("td");
       tdCls.appendChild(makeDatalistCell(row, i, "cls", "classesList"));
       tr.appendChild(tdCls);
 
-      // assignment (input + datalist)
       var tdAssign = document.createElement("td");
       tdAssign.appendChild(makeDatalistCell(row, i, "assignment", "assignmentsList"));
       tr.appendChild(tdAssign);
 
-      // notes (contenteditable)
       var tdNotes = document.createElement("td");
       tdNotes.appendChild(makeEditableCell(row, i, "notes"));
       tr.appendChild(tdNotes);
@@ -640,6 +728,7 @@
     input.addEventListener("focus", function(){ lastFocused = {rowIndex:i, col:col}; });
     function commit(){
       row[col] = input.value.trim();
+      addToKnownList(col, row[col]);
       saveToStorage();
       refreshAuxLists();
     }
@@ -648,34 +737,91 @@
     return input;
   }
 
-  // ---------- toolbar actions ----------
+  // ---------- toolbar actions: adding rows ----------
+
+  function focusNewTopRow(cellIndex){
+    var rows = tbody.querySelectorAll("tr");
+    var newRow = rows[0];
+    if(newRow){
+      var cells = newRow.querySelectorAll(".cell");
+      if(cells[cellIndex]) cells[cellIndex].focus();
+    }
+  }
 
   document.getElementById("btnAddRow").addEventListener("click", function(){
-    data.push({start:"", end:"", cls:"", assignment:"", notes:""});
+    data.unshift({start:"", end:"", cls:"", assignment:"", notes:""});
     saveToStorage();
-    render(true);
-    tableScroll.scrollTop = tableScroll.scrollHeight;
-    var rows = tbody.querySelectorAll("tr");
-    var lastRow = rows[rows.length - 1];
-    if(lastRow){
-      var cell = lastRow.querySelectorAll(".cell")[0];
-      if(cell) cell.focus();
-    }
+    render(false);
+    tableScroll.scrollTop = 0;
+    focusNewTopRow(0);
   });
 
   document.getElementById("btnInsertNow").addEventListener("click", function(){
     var now = formatNow();
     if(!lastFocused || !data[lastFocused.rowIndex]){
-      data.push({start:now, end:"", cls:"", assignment:"", notes:""});
+      data.unshift({start:now, end:"", cls:"", assignment:"", notes:""});
       saveToStorage();
-      render(true);
-      tableScroll.scrollTop = tableScroll.scrollHeight;
+      render(false);
+      tableScroll.scrollTop = 0;
       return;
     }
     data[lastFocused.rowIndex][lastFocused.col] = now;
     saveToStorage();
     render(true);
   });
+
+  document.getElementById("btnConnectTime").addEventListener("click", function(){
+    if(!data.length){
+      alert('There\'s nothing to connect to yet — add an event first, then "Connect time" can carry its time into the next one.');
+      return;
+    }
+    var prev = data[0];
+    var t = (prev.end && prev.end.trim()) ? prev.end.trim() : (prev.start && prev.start.trim() ? prev.start.trim() : "");
+    if(!t){
+      alert("The most recent entry doesn't have a start or end time set yet.");
+      return;
+    }
+    data.unshift({start:t, end:"", cls:"", assignment:"", notes:""});
+    saveToStorage();
+    render(false);
+    tableScroll.scrollTop = 0;
+    focusNewTopRow(1); // end time cell, since start is prefilled
+  });
+
+  // ---------- insert previous time (date + time picker) ----------
+
+  document.getElementById("btnInsertPrev").addEventListener("click", function(){
+    var d = new Date();
+    pickDate.value = d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+    pickTime.value = pad(d.getHours())+":"+pad(d.getMinutes());
+    insertTimeModal.classList.add("visible");
+  });
+  document.getElementById("btnInsertTimeCancel").addEventListener("click", function(){
+    insertTimeModal.classList.remove("visible");
+  });
+  document.getElementById("btnInsertTimeConfirm").addEventListener("click", function(){
+    if(!pickDate.value || !pickTime.value){
+      alert("Pick both a date and a time first.");
+      return;
+    }
+    var formatted = pickDate.value + " " + pickTime.value;
+    if(!lastFocused || !data[lastFocused.rowIndex]){
+      data.unshift({start:formatted, end:"", cls:"", assignment:"", notes:""});
+      saveToStorage();
+      render(false);
+      tableScroll.scrollTop = 0;
+    }else{
+      data[lastFocused.rowIndex][lastFocused.col] = formatted;
+      saveToStorage();
+      render(true);
+    }
+    insertTimeModal.classList.remove("visible");
+  });
+  insertTimeModal.addEventListener("click", function(e){
+    if(e.target === insertTimeModal) insertTimeModal.classList.remove("visible");
+  });
+
+  // ---------- backup / load csv ----------
 
   document.getElementById("btnBackup").addEventListener("click", function(){
     downloadCsv();
@@ -714,6 +860,10 @@
           });
         }
         data = imported;
+        imported.forEach(function(row){
+          addToKnownList("cls", row.cls);
+          addToKnownList("assignment", row.assignment);
+        });
         saveToStorage();
         render(false);
         tableScroll.scrollTop = 0;
@@ -725,6 +875,84 @@
     reader.readAsText(file);
   });
 
+  // ---------- clear all ----------
+
+  document.getElementById("btnClearAll").addEventListener("click", function(){
+    if(!data.length){
+      statusText.textContent = "Nothing to clear";
+      return;
+    }
+    clearModal.classList.add("visible");
+  });
+  document.getElementById("btnClearCancel").addEventListener("click", function(){
+    clearModal.classList.remove("visible");
+  });
+  document.getElementById("btnClearConfirm").addEventListener("click", function(){
+    data = [];
+    saveToStorage();
+    render(false);
+    tableScroll.scrollTop = 0;
+    clearModal.classList.remove("visible");
+    statusText.textContent = "All entries cleared";
+  });
+  clearModal.addEventListener("click", function(e){
+    if(e.target === clearModal) clearModal.classList.remove("visible");
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Escape") return;
+    if(clearModal.classList.contains("visible")) clearModal.classList.remove("visible");
+    if(insertTimeModal.classList.contains("visible")) insertTimeModal.classList.remove("visible");
+    if(manageModal.classList.contains("visible")) manageModal.classList.remove("visible");
+  });
+
+  // ---------- manage dropdown lists ----------
+
+  function renderManageList(ul, field){
+    ul.innerHTML = "";
+    var items = knownLists[field];
+    if(!items.length){
+      var li = document.createElement("li");
+      li.className = "empty-note";
+      li.textContent = "Nothing here yet — it fills in as values are typed.";
+      ul.appendChild(li);
+      return;
+    }
+    items.forEach(function(value, idx){
+      var li = document.createElement("li");
+      var span = document.createElement("span");
+      span.textContent = value;
+      var removeBtn = document.createElement("button");
+      removeBtn.className = "danger-text";
+      removeBtn.title = "Remove from suggestions";
+      removeBtn.textContent = "\u00D7";
+      removeBtn.addEventListener("click", function(){
+        knownLists[field].splice(idx, 1);
+        saveKnownLists();
+        refreshAuxLists();
+        renderManageModal();
+      });
+      li.appendChild(span);
+      li.appendChild(removeBtn);
+      ul.appendChild(li);
+    });
+  }
+
+  function renderManageModal(){
+    renderManageList(manageClsList, "cls");
+    renderManageList(manageAssignList, "assignment");
+  }
+
+  document.getElementById("btnManageLists").addEventListener("click", function(){
+    renderManageModal();
+    manageModal.classList.add("visible");
+  });
+  document.getElementById("btnManageClose").addEventListener("click", function(){
+    manageModal.classList.remove("visible");
+  });
+  manageModal.addEventListener("click", function(e){
+    if(e.target === manageModal) manageModal.classList.remove("visible");
+  });
+
   // ---------- summary / time spent ----------
 
   function tryParseDate(str){
@@ -733,7 +961,6 @@
     if(!s) return null;
     var t = Date.parse(s);
     if(!isNaN(t)) return new Date(t);
-    // try "YYYY-MM-DD HH:MM" style with a space instead of T
     var alt = s.replace(" ", "T");
     t = Date.parse(alt);
     if(!isNaN(t)) return new Date(t);
@@ -821,7 +1048,6 @@
     statusText.textContent = "Backed up as " + filename;
   }
 
-  // simple RFC4180-ish CSV parser: handles quoted fields, commas, escaped quotes, CRLF/LF
   function parseCsv(text){
     var rows = [];
     var row = [];
@@ -864,9 +1090,13 @@
   // ---------- init ----------
 
   labelMode = loadLabelMode();
-  applyLabels();
   loadUser();
+  colWidths = loadColWidths();
+  applyColWidths();
+  attachResizerHandles();
   data = loadFromStorage();
+  knownLists = loadKnownLists();
+  applyLabels();
   render(false);
   tableScroll.scrollTop = 0;
 })();
